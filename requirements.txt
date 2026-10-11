@@ -87,9 +87,7 @@ pytest-asyncio==1.4.0
 python-dateutil==2.9.0.post0
 python-dotenv==1.2.3
 python-multipart==0.0.32
-pywin32==312
 PyYAML==6.0.3
--e git+https://github.com/NeerajKumarRay1/assesment-quant-.git@1add2d1ffd8c82de5625a52fd6dc69c93c32de5c#egg=quant_trading_assessment
 referencing==0.37.0
 requests==2.34.2
 rich==15.0.0
