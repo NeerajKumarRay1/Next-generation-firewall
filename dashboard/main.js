@@ -1,5 +1,5 @@
 // AI-NGFW Dashboard — Traffic Monitor
-const API_BASE = window.location.origin;
+const BACKEND_URL = 'https://next-generation-firewall.onrender.com';
 let socket = null;
 let trafficChart = null;
 let protocolChart = null;
@@ -138,8 +138,8 @@ function initCharts() {
 
 // ── WebSocket ─────────────────────────────────────────────
 function connectWebSocket() {
-    const wsProto = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    const wsUrl = `${wsProto}//${window.location.hostname}:8000/ws`;
+    const wsProto = BACKEND_URL.startsWith('https') ? 'wss:' : 'ws:';
+    const wsUrl = `${wsProto}//${BACKEND_URL.replace(/^https?:\/\//, '')}/ws`;
     console.log(`  🔌 Attempting WebSocket connection to: ${wsUrl}`);
     try {
         socket = new WebSocket(wsUrl);
