@@ -210,6 +210,14 @@ async def websocket_broadcaster():
             
         await asyncio.sleep(2.0)
 
+async def demo_traffic_loop():
+    import random
+    import seed_demo
+
+    while True:
+        await asyncio.to_thread(seed_demo.emit_flow, random.random() < 0.35)
+        await asyncio.sleep(random.uniform(0.4, 1.6))
+
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
     await manager.connect(websocket)
@@ -228,6 +236,8 @@ async def startup_event():
     firewall.init_firewall()
     # Start the broadcaster task
     asyncio.create_task(websocket_broadcaster())
+    if os.getenv("DEMO_MODE", "false").lower() == "true":
+        asyncio.create_task(demo_traffic_loop())
 
 # Mount dashboard static directory
 dashboard_path = os.path.join(BASE_DIR, "dashboard")
